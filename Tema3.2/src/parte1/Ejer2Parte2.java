@@ -7,14 +7,16 @@ public class Ejer2Parte2 {
 	public static void main(String[]args) {
 		Scanner reader = new Scanner(System.in);
 		
+		//creamos variables para almacenar contraseña ,intento y un boolean
 		String contraseña;
 		String intento;
-		int resultado;
 		boolean continuar = true;
 		
+		//pregunto por la contraseña
 		System.out.println("Dime la contraseña ");
 		contraseña = reader.nextLine();
 		
+		//creamos un while para que pregunte la contraseña hasta acertar
 		while (continuar) {
 			System.out.println("Intenta adivinar la contraseña");
 			intento = reader.nextLine();

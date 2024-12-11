@@ -19,14 +19,12 @@ public class Ejer3 {
 		reader.close();
 	}
 	static int comprobar(String contraseña) {
-		int contador;
+		int contador = 0;
 		
 		for (int i = 0 ; i < contraseña.length() ; i++) {
 			
-			if (contraseña.charAt(i) == '*') {
+			if (contraseña.charAt(i) == ' ') {
 				contador++;
-			} else {
-				System.out.println("Aqui no hay nayh");
 			}
 		}
 		
