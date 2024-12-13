@@ -19,18 +19,26 @@ public class Ejer6 {
 		
 		reader.close();
 	}
-	static boolean palindroma(String a) {
-		int contador = a.length()-1;
-		boolean frase;
+	static boolean palindroma(String frase) {
+		int contador = frase.length()-1;
+		boolean respuesta;
+		String fraseDelRevez;
 		
-		for (int i = 0 ; i < a.length() ; i++) {
-			if () {
+		for (int i = 0 ; i < frase.length() ; i++) {
+			if (fraseDelRevez[]) {
 				frase += "";
 			} else {
-			frase += a.charAt(contador);
+			frase += frase.charAt(contador);
 			}
 			contador--;
 		}
-		return frase;
+		return respuesta;
+	}
+	static String invierteCadena(String cadena) {
+		String frase ="";
+		
+		for (int i = cadena.length()-1 ; i < cadena.length() ; i--) {
+			
+		}
 	}
 }

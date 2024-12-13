@@ -7,9 +7,6 @@ public class Ejer3 {
 		Scanner reader = new Scanner(System.in);
 		
 		String contraseña;
-		String intento;
-		int resultado;
-		boolean continuar = true;
 		
 		System.out.println("Dime la contraseña ");
 		contraseña = reader.nextLine();
