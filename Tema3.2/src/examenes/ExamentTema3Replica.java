@@ -29,6 +29,7 @@ public class ExamentTema3Replica {
 
 	        // Juego principal
 	        boolean jugador1Turno = true;
+	        
 	        while (barcosHundidosJugador1 < numBarcos && barcosHundidosJugador2 < numBarcos) {
 	            if (jugador1Turno) {
 	                System.out.println("Turno del Jugador 1:");
