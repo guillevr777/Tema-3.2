@@ -35,7 +35,8 @@ public class TresRayasErrores {
 			// bienvenida a los jugadores
 			System.out.println("Bienvenido al juego del 3 en rayas");
 
-			while (!esGanador(turno, tablero)) {
+			while (!esGanador(turno, tablero) && !esEmpate(tablero)) {
+	
 				pintaTablero(tablero);
 				if (turno == 'O') {
 					System.out.println("Turno del jugador O");
@@ -58,15 +59,23 @@ public class TresRayasErrores {
 						} finally {
 							reader.nextLine();
 						}
-					} while (fila > 2 || fila < 0 || columna > 2
-							|| columna < 0 && usuarioMueveFicha(tablero, fila, columna));
+					} while (fila > 2 || fila < 0 || columna > 2 || columna < 0 && usuarioMueveFicha(tablero, fila, columna));
+					usuarioMueveFicha(tablero, fila, columna);
 				}
-
-				
-				turno = turno == 'X' ? 'O' : 'X';
-
+				if (!esGanador(turno, tablero)) {
+					
+					turno = turno == 'X' ? 'O' : 'X';
+					
+				} else {
+					pintaTablero(tablero);
+				}	
 			}
+			
+			if (esGanador(turno, tablero)) {
 			System.out.println("Ha ganado el jugador " + turno);
+			} else {
+				System.out.println("Ha sido empate.");
+			}
 
 			// llamamos a la funcion que se encarga de dejar en tablero a 0
 			limpiarTablero(tablero);
@@ -136,7 +145,6 @@ public class TresRayasErrores {
 		// devolvemos un booleano
 		return valida;
 	}
-
 	static void limpiarTablero(char tablero[][]) {
 
 		// borramos el tablero completamente
@@ -145,6 +153,18 @@ public class TresRayasErrores {
 				tablero[i][j] = ' ';
 			}
 		}
+	}
+	
+	static boolean esEmpate(char tablero[][]) {
+		boolean esEmpate = true;
+	    for (int i = 0; i < tablero.length; i++) {
+	        for (int j = 0; j < tablero[i].length; j++) {
+	            if (tablero[i][j] == '-') {
+	                esEmpate = false; 
+	            }
+	        }
+	    }
+	    return esEmpate;
 	}
 
 	static boolean esGanador(char turno, char tablero[][]) {
