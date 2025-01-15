@@ -78,13 +78,13 @@ public class hundirLaFloraDeNuevo {
 					jugadorRepite = true;
 				}
 			}
-		} while (jugadorRepite);
-			if (puntosJugadorUno == NUMEROBARCOS || puntosJugadorDos == NUMEROBARCOS) {
-				ganador = true;
+			if (puntosJugadorUno >= NUMEROBARCOS || puntosJugadorDos >= NUMEROBARCOS) {
+				jugadorRepite = false;
 			}
-			
+		} while (jugadorRepite);
+			if (puntosJugadorUno != NUMEROBARCOS && puntosJugadorDos != NUMEROBARCOS) {
 				jugador = jugador == 'X' ? 'O' : 'X';
-	
+			}
 		}
 		pintaTablero(tablero);
 		System.out.println("Ha ganado el jugador " + jugador);
