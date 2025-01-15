@@ -153,27 +153,29 @@ public class En3Rayas {
 		}
 	}
 	static boolean esGanador(char turno, char tablero[][]) {
-		//inicializamos el boolean que posteriormente devolveremos al llamar a la funcion
+		// inicializamos el boolean que posteriormente devolveremos al llamar a la
+		// funcion
 		boolean ganador = false;
-		
-		for (int i = 0 ; i < tablero.length ; i++) {
-			for (int j = 0 ; j < tablero.length ; j++) {
-				//si hay 3 circulos o equis en horizontal gana
+
+		for (int i = 0; i < tablero.length; i++) {
+			for (int j = 0; j < tablero.length; j++) {
+				// si hay 3 circulos o equis en horizontal gana
 				if (tablero[i][0] == turno && tablero[i][1] == turno && tablero[i][2] == turno) {
 					ganador = true;
 				}
-				//si hay 3 circulos o equis en vertical gana
+				// si hay 3 circulos o equis en vertical gana
 				if (tablero[0][i] == turno && tablero[1][i] == turno && tablero[2][i] == turno) {
 					ganador = true;
 				}
 			}
 		}
-		//si hay 3 circulos o equis en diagonal gana
-		if (tablero[0][0] == turno && tablero[1][1] == turno && tablero[2][2] == turno || tablero[0][2] == turno && tablero[1][1] == turno && tablero[2][0] == turno) {
+		// si hay 3 circulos o equis en diagonal gana
+		if (tablero[0][0] == turno && tablero[1][1] == turno && tablero[2][2] == turno
+				|| tablero[0][2] == turno && tablero[1][1] == turno && tablero[2][0] == turno) {
 			ganador = true;
 		}
-		
-		//devolvemos un boolean en caso ganador true sino false
+
+		// devolvemos un boolean en caso ganador true sino false
 		return ganador;
 	}
-}	
+}
