@@ -84,6 +84,8 @@ public class hundirLaFloraDeNuevo {
 		} while (jugadorRepite);
 			if (puntosJugadorUno != NUMEROBARCOS && puntosJugadorDos != NUMEROBARCOS) {
 				jugador = jugador == 'X' ? 'O' : 'X';
+			} else {
+				ganador = true;
 			}
 		}
 		pintaTablero(tablero);
