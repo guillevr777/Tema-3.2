@@ -1,5 +1,6 @@
 package examenes;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -17,8 +18,8 @@ public class PortaMinasExamen {
 		int columnas;
 		
 		//donde descubre la posicion
-		char fila;
-		int columna;
+		char fila = 0;
+		int columna = 0;
 		
 		//preguntamos por numero columna y filas
 		System.out.println("Cuantas filas y columnas tendra el tablero:");
@@ -30,6 +31,9 @@ public class PortaMinasExamen {
 				
 		//tablero principal donde estaran las minas
 		char tablero[][];
+		
+		//inicializamos fuilase
+		int filase = 0;
 		
 		//inicializamos los tableros llamando a la funcion
 		tablero = inicializaTablero(filas, columnas);
@@ -53,13 +57,20 @@ public class PortaMinasExamen {
 		 while (!minaExplotada && !comprobar(tableroJugador, NUMEROMINAS)) {
 		//imprimimos el tablero
 		imprimirTablero(tableroJugador);
-		
+		try {
 		//preguntamos por la posicion a descubrir
 		System.out.println("Dime una fila y columna donde desvelar la posicion:");
 		fila = reader.next().toUpperCase().charAt(0);
+		filase = fila-'A';
 		columna = reader.nextInt()-1;
-		
-		int filase = (int)fila-65;
+			assert filase >= 0 && filase < tablero.length && columna >= 0 && columna < tablero[0].length 
+					: "Error ; Te saliste de la tabla";
+		} catch (InputMismatchException e) {
+		    System.out.println("Error: Entrada inválida. Por favor, introduce una letra para la fila y un número para la columna.");
+		    reader.nextLine(); // Limpiamos el buffer de entrada
+		} catch (AssertionError e) {
+		    System.out.println(e.getMessage());
+		}
 		
 		if (descubrirCelda(tableroJugador, tablero, fila, columna)) {
 			tableroJugador[filase][columna] = tablero[filase][columna];
@@ -106,38 +117,28 @@ public class PortaMinasExamen {
 		}
 	}
 	static void calcularClues(char[][] tablero) {
-	    // Recorremos todas las posiciones del tablero
-	    for (int i = 0; i < tablero.length; i++) {
-	        for (int j = 0; j < tablero[i].length; j++) {
-	            // Si la posición no es una mina, calculamos el número de minas alrededor
-	            if (tablero[i][j] != '*') {
-	                int numMinas = 0;
-
-	                // Verificamos todas las posiciones vecinas (incluyendo diagonales)
-	                for (int filaCerca = -1; filaCerca <= 1; filaCerca++) {
-	                    for (int columnaCerca = -1; columnaCerca <= 1; columnaCerca++) {
-	                        // Calculamos las coordenadas vecinas
-	                        int filaVecina = i + filaCerca;
-	                        int columnaVecina = j + columnaCerca;
-
-	                        // Comprobamos que las coordenadas vecinas están dentro de los límites
-	                        // y que no es la posición actual
-	                        if (filaVecina >= 0 && filaVecina < tablero.length &&
-	                            columnaVecina >= 0 && columnaVecina < tablero[i].length &&
-	                            !(filaCerca == 0 && columnaCerca == 0)) {
-	                            // Si la posición vecina contiene una mina, aumentamos el contador
-	                            if (tablero[filaVecina][columnaVecina] == '*') {
-	                                numMinas++;
-	                            }
-	                        }
-	                    }
-	                }
-
-	                // Guardamos el número de minas como un carácter en la posición actual
-	                tablero[i][j] = (char) (numMinas + '0'); // Convertimos el número a carácter
-	            }
-	        }
-	    }
+		int filaParalela;
+		int columnaParalela;
+		int numMinas;
+		for (int i = 0 ; i < tablero.length ; i++) {
+			for (int j = 0 ; j < tablero[i].length ; j++) {
+				if (tablero[i][j] != '*') {
+					numMinas = 0;
+					for (int filaCerca = -1 ; filaCerca <= 1 ; filaCerca++) {
+						for (int columnaCerca = -1 ; columnaCerca <= 1 ; columnaCerca++) {
+							filaParalela = i + filaCerca;
+							columnaParalela = j + columnaCerca;
+							if (filaParalela >= 0 && filaParalela < tablero.length && columnaParalela >= 0 && columnaParalela < tablero[i].length && !(filaCerca == 0 && columnaCerca == 0)) {
+								if (tablero[filaParalela][columnaParalela] == '*') {
+									numMinas++;
+								}
+							}
+						}
+					}
+					tablero[i][j] = (char)(numMinas + '0');
+				}
+			}
+		}
 	}
 	static void imprimirTablero(char[][] tablero) {
 		char letra = 'A';
