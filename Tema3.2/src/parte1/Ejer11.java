@@ -5,8 +5,8 @@ public class Ejer11 {
 	public static void main(String[] args) {
 
 		//creamos los array de char con las letras demandadas
-		char conjunto1[] = {'e','i','k','m','p','q','r','s','t','u','v'};
-		char conjunto2[] = {'p','v','i','u','m','t','e','r','k','q','s'};
+		char conjunto2[] = {'e','i','k','m','p','q','r','s','t','u','v'};
+		char conjunto1[] = {'p','v','i','u','m','t','e','r','k','q','s'};
 	
 		 // Texto de ejemplo
         String texto = "PaquiTo";
