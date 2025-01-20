@@ -67,7 +67,7 @@ public class PortaMinasExamen {
 					: "Error ; Te saliste de la tabla";
 		} catch (InputMismatchException e) {
 		    System.out.println("Error: Entrada inválida. Por favor, introduce una letra para la fila y un número para la columna.");
-		    reader.nextLine(); // Limpiamos el buffer de entrada
+		    reader.nextLine();
 		} catch (AssertionError e) {
 		    System.out.println(e.getMessage());
 		}
@@ -116,24 +116,25 @@ public class PortaMinasExamen {
 		tablero[fila][columna] = '*';
 		}
 	}
-	static void calcularClues(char[][] tablero) {
-		int filaParalela;
-		int columnaParalela;
+	static void calcularClues(char[][] tablero) { 
 		int numMinas;
+		int filaVecina;
+		int columnaVecina;
+		
 		for (int i = 0 ; i < tablero.length ; i++) {
 			for (int j = 0 ; j < tablero[i].length ; j++) {
 				if (tablero[i][j] != '*') {
 					numMinas = 0;
 					for (int filaCerca = -1 ; filaCerca <= 1 ; filaCerca++) {
 						for (int columnaCerca = -1 ; columnaCerca <= 1 ; columnaCerca++) {
-							filaParalela = i + filaCerca;
-							columnaParalela = j + columnaCerca;
-							if (filaParalela >= 0 && filaParalela < tablero.length && columnaParalela >= 0 && columnaParalela < tablero[i].length && !(filaCerca == 0 && columnaCerca == 0)) {
-								if (tablero[filaParalela][columnaParalela] == '*') {
+							filaVecina = i + filaCerca;
+							columnaVecina = j + columnaCerca;
+							if (filaVecina >= 0 && filaVecina < tablero.length && columnaVecina >= 0 && columnaVecina < tablero[i].length && !(filaCerca == 0 && columnaCerca == 0)) {
+								if (tablero[filaVecina][columnaVecina] == '*') {
 									numMinas++;
 								}
 							}
-						}
+						}	
 					}
 					tablero[i][j] = (char)(numMinas + '0');
 				}
