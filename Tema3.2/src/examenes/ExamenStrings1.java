@@ -17,27 +17,28 @@ public class ExamenStrings1 {
 	public static void main(String[] args) {
 		
 		char letra;
-		boolean ganador = false;
 		
 		generaPalabra();
 		System.out.println(palabraSecreta);
 		System.out.println("Bienvenido al juego del calamardo:");
 		
-		while (!ganador && !palabraPista.equals(palabraSecreta) && NUMINTENTOS > 0) {
+		while (!palabraPista.equals(palabraSecreta) && NUMINTENTOS > 0) {
 		if (menu() != 2) {
 			System.out.println("Dime la letra que quieres probar :");
-			letra = reader.next().toUpperCase().charAt(0);
+			letra = reader.next().toLowerCase().charAt(0);
 			compruebaLetra(letra);
 		} else {
 			System.out.println("Que palabra crees que es?");
 			intento = reader.next();
 			compruebaPalabra();
+			if (!palabraPista.equals(palabraSecreta)) {
 			NUMINTENTOS--;
 			}
+			}
 			pintaPista();
-			ganador = false;
+		    System.out.println("Te quedan " + NUMINTENTOS + " intentos.");
 		}
-		if (NUMINTENTOS > 0) {
+		if (palabraPista.equals(palabraSecreta)) {
 			System.out.println("Has ganado el ahorcado!");
 		} else {
 			System.out.println("Has perdido crack!");
@@ -65,24 +66,21 @@ public class ExamenStrings1 {
 	
 	
 	static void compruebaLetra(char letra) {
-	    letra = Character.toLowerCase(letra);
-	    String nuevaPista = ""; 
-	    boolean letraAcertada = false;
+		String sustitutoPalabraPista = "";
+		char pruebaLetra = 0;
 
-	    for (int i = 0; i < palabraSecreta.length(); i++) {
-	        if (palabraSecreta.charAt(i) == letra) {
-	            nuevaPista += letra;
-	            letraAcertada = true;
-	        } else {
-	            nuevaPista += palabraPista.charAt(i);
-	        }
-	    }
-
-	    if (!letraAcertada && !noAcertadas.contains(String.valueOf(letra))) {
-	        noAcertadas += letra; // Registrar letra no acertada
-	    }
-
-	    palabraPista = nuevaPista; // Actualizar la pista
+		for (int i = 0 ; i < palabraSecreta.length() ; i++) {
+		   pruebaLetra = palabraSecreta.charAt(i);
+		   if (letra == pruebaLetra) {
+			   sustitutoPalabraPista += letra;	
+		   } else {
+			   sustitutoPalabraPista += palabraPista.charAt(i);
+		   }
+	   }
+	   if (!palabraSecreta.contains(String.valueOf(letra)) && !noAcertadas.contains(String.valueOf(letra))) {
+		   noAcertadas += letra;
+	   }
+	   palabraPista = sustitutoPalabraPista;
 	}
 	
 	
