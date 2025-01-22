@@ -48,10 +48,7 @@ public class WordleGame {
 	}
 		static void trySentence(char letter) {
 			
-			for(
-			) {
-				
-			}
+			
 			
 		}
 }
